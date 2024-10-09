@@ -1,0 +1,10 @@
+Explicação do Código:
+Carregamento de documentos de URLs: A função load_document_from_url faz uma solicitação GET para a URL, usa o BeautifulSoup para extrair o texto da página e retorna o conteúdo.
+
+Carregamento de documentos locais (PDF e TXT): A função load_documents_from_directory percorre uma pasta especificada, carregando arquivos PDF e TXT, e armazenando o conteúdo em uma lista de documentos.
+
+Indexação com FAISS: O conteúdo carregado (tanto da URL quanto dos arquivos locais) é dividido em chunks (trechos menores de texto) com o CharacterTextSplitter e indexado usando o FAISS para facilitar a busca vetorial.
+
+Cadeia Conversacional com Recuperação e Geração (RAG): A função create_chain cria uma cadeia que combina recuperação de documentos relevantes (via FAISS) e geração de respostas (via LLM). Essa cadeia usa o modelo llama3-8b-8192 para gerar respostas com base nos documentos recuperados.
+
+Interface do Streamlit: O usuário pode inserir uma pergunta via st.text_input, que será usada para recuperar documentos relevantes e gerar uma resposta via RAG.
